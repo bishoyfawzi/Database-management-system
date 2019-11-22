@@ -16,6 +16,7 @@ echo "  4)Create Table on Database "
 echo "  5)Drop Field from table "
 echo "  6)ADD  Field to table "
 echo "  7)Add records"
+echo "  8)Delete records"
 
 read n
 case $n in
@@ -131,6 +132,27 @@ case $n in
 	mysql -uroot -p${rootpasswd} -e  "INSERT INTO ${db7}.${t7}(${c7}) VALUES (${v7});" 2>/dev/null
 	mysql -uroot -p${rootpasswd} -e " SELECT * FROM  ${db7}.${t7};" 2>/dev/null
 	echo "" ;;
+  8) echo "Showing existing databases..."
+        mysql -uroot -p${rootpasswd} -e "show databases;"
+        echo ""
+        echo "Please enter the NAME database  ! "
+        read db8
+        mysql -uroot -p${rootpasswd} ${db8} -e  "show tables;" 2>/dev/null
+        echo ""
+        echo "Please enter the NAME of table  ! "
+        read t8
+        mysql -uroot -p${rootpasswd} -e "DESCRIBE ${db8}.${t8}" 2>/dev/null
+        echo ""
+        echo "Please enter colums names like c1,c2,c3,..."
+        read c8
+        mysql -uroot -p${rootpasswd} -e " SELECT * FROM  ${db8}.${t8};" 2>/dev/null
+	echo ""
+        echo "Please enter values of record you want delete like v1,v2,v3,..."
+        read v7
+	mysql -uroot -p${rootpasswd} -e  "DELETE FROM ${db8}.${t8} WHERE ${c8}=${v7};"
+        mysql -uroot -p${rootpasswd} -e " SELECT * FROM  ${db8}.${t8};" 2>/dev/null
+        echo "" ;;
+
 
   *) echo "invalid option";;
 esac
