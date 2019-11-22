@@ -1,7 +1,6 @@
 #!/bin/bash
-#echo "Please enter root user MySQL password!"
-#echo "Note: password will be hidden when typing"
-#read -s rootpasswd
+#This script is written by Bishoy Fawzi
+#This script can add,remove databases , add,remove table , add,remove fields , add,remove record 
 
 read -s -p "Enter MYSQL root password: " rootpasswd
 until mysql -u root -p$rootpasswd  -e ";" ; do
