@@ -16,7 +16,7 @@ echo "  5)Drop Field from table "
 echo "  6)ADD  Field to table "
 echo "  7)Add records"
 echo "  8)Delete records"
-
+echo "  9)Select records with condition"
 read n
 case $n in
   1) 	echo "Please enter the NAME of the new MySQL database! (example: database1)"
@@ -126,7 +126,7 @@ case $n in
 	echo ""
 	echo "Please enter colums names like c1,c2,c3,..."
 	read c7
-	echo "Please enter values of record like v1,v2,v3,..."
+	echo "Please enter values of record like v1,v2,v3,... if string Please add between '' "
 	read v7
 	mysql -uroot -p${rootpasswd} -e  "INSERT INTO ${db7}.${t7}(${c7}) VALUES (${v7});" 2>/dev/null
 	mysql -uroot -p${rootpasswd} -e " SELECT * FROM  ${db7}.${t7};" 2>/dev/null
@@ -146,12 +146,31 @@ case $n in
         read c8
         mysql -uroot -p${rootpasswd} -e " SELECT * FROM  ${db8}.${t8};" 2>/dev/null
 	echo ""
-        echo "Please enter values of record you want delete like v1,v2,v3,..."
-        read v7
-	mysql -uroot -p${rootpasswd} -e  "DELETE FROM ${db8}.${t8} WHERE ${c8}=${v7};"
+        echo "Please enter values of record you want delete like v1,v2,v3,... if string Please add between '' "
+        read v8
+	mysql -uroot -p${rootpasswd} -e  "DELETE FROM ${db8}.${t8} WHERE ${c8}=${v8};"
         mysql -uroot -p${rootpasswd} -e " SELECT * FROM  ${db8}.${t8};" 2>/dev/null
         echo "" ;;
 
+  9) echo "Showing existing databases..."
+        mysql -uroot -p${rootpasswd} -e "show databases;"
+        echo ""
+        echo "Please enter the NAME database  ! "
+        read db9
+        mysql -uroot -p${rootpasswd} ${db9} -e  "show tables;" 2>/dev/null
+        echo ""
+        echo "Please enter the NAME of table  ! "
+        read t9
+	echo "Please enter your condition like >,<,= "
+	read co9
+        mysql -uroot -p${rootpasswd} -e "DESCRIBE ${db9}.${t9}" 2>/dev/null
+        echo ""
+        echo "Please enter colums name like c1"
+        read c9
+        echo "Please enter values of your condition"
+        read v9
+        mysql -uroot -p${rootpasswd} -e  "SELECT * FROM ${db9}.${t9} WHERE ${c9}${co9}${v9};"
+        echo "" ;;
 
   *) echo "invalid option";;
 esac
