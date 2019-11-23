@@ -1,6 +1,8 @@
 #!/bin/bash
 #This script is written by Bishoy Fawzi
 #This script can add,remove databases , add,remove table , add,remove fields , add,remove record 
+#Please us this script as root
+
 
 read -s -p "Enter MYSQL root password: " rootpasswd
 until mysql -u root -p$rootpasswd  -e ";" ; do
