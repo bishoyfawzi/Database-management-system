@@ -161,15 +161,15 @@ case $n in
         echo ""
         echo "Please enter the NAME of table  ! "
         read t9
-	echo "Please enter your condition like >,<,= "
+	echo "Please enter your condition like >1,<1,=1 "
 	read co9
         mysql -uroot -p${rootpasswd} -e "DESCRIBE ${db9}.${t9}" 2>/dev/null
         echo ""
         echo "Please enter colums name like c1"
         read c9
-        echo "Please enter values of your condition"
-        read v9
-        mysql -uroot -p${rootpasswd} -e  "SELECT * FROM ${db9}.${t9} WHERE ${c9}${co9}${v9};"
+#        echo "Please enter values of your condition"
+#        read v9
+        mysql -uroot -p${rootpasswd} -e  "SELECT * FROM ${db9}.${t9} WHERE ${c9}${co9};"
         echo "" ;;
 
   *) echo "invalid option";;
