@@ -67,6 +67,8 @@ case $n in
 	echo "Please enter the NAME of MySQL database You Want To Delete! "
         read dbdel
 	mysql -uroot -p${rootpasswd} -e "DROP DATABASE ${dbdel};"
+	mysql -uroot -p${rootpasswd} -e "show databases;"
+        echo ""
 	echo "Database ${dbdel} successfully Deleted!"
 
 	;;
