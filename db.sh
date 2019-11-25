@@ -71,15 +71,34 @@ case $n in
         ls  $HOME/DB-managemnt/${db}/
         echo "Please enter the NAME table ! "
         read tb
+	echo "-----------"
+	cat $HOME/DB-managemnt/${db}/${tb}
+	echo ""
         echo "Please enter the number of feild ! "
         read f
 	awk -F, '{for(i=1;i<=NF;i++)if(i!=x)f=f?f FS $i:$i;print f;f=""}' x=${f} $HOME/DB-managemnt/${db}/${tb} >> $HOME/DB-managemnt/${db}/${tb}.new
 	mv $HOME/DB-managemnt/${db}/${tb}.new $HOME/DB-managemnt/${db}/${tb}
 	colum -t  $HOME/DB-managemnt/${db}/${tb}
-
     ;;
 
-  7) 
+  7) ls  $HOME/DB-managemnt/
+        echo "Please enter the NAME database you want to delete table on it ! "
+        read db
+        echo "--------------"
+        ls  $HOME/DB-managemnt/${db}/
+        echo "Please enter the NAME table ! "
+        read tb
+        echo "-----------"
+        cat $HOME/DB-managemnt/${db}/${tb}
+        echo ""
+	echo "Please enter values of record you want delete like v1,v2,v3,..."
+	read v
+	echo "${v}" >> $HOME/DB-managemnt/${db}/${tb}
+	echo "---------------"
+	cat $HOME/DB-managemnt/${db}/${tb}
+        echo ""
+
+
   8) echo "Showing existing databases..."
         mysql -uroot -p${rootpasswd} -e "show databases;"
         echo ""
