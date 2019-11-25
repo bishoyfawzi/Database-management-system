@@ -53,7 +53,7 @@ case $n in
 	;;
 
   5)    ls  $HOME/DB-managemnt/
-        echo "Please enter the NAME database you want to delete table on it ! "
+        echo "Please enter the NAME database ! "
         read db
         echo "--------------"
         ls  $HOME/DB-managemnt/${db}/
@@ -65,7 +65,7 @@ case $n in
         cat $HOME/DB-managemnt/${db}/${tb}
 	;;
   6)  ls  $HOME/DB-managemnt/
-        echo "Please enter the NAME database you want to delete table on it ! "
+        echo "Please enter the NAME database! "
         read db
         echo "--------------"
         ls  $HOME/DB-managemnt/${db}/
@@ -78,11 +78,11 @@ case $n in
         read f
 	awk -F, '{for(i=1;i<=NF;i++)if(i!=x)f=f?f FS $i:$i;print f;f=""}' x=${f} $HOME/DB-managemnt/${db}/${tb} >> $HOME/DB-managemnt/${db}/${tb}.new
 	mv $HOME/DB-managemnt/${db}/${tb}.new $HOME/DB-managemnt/${db}/${tb}
-	colum -t  $HOME/DB-managemnt/${db}/${tb}
+	cat $HOME/DB-managemnt/${db}/${tb}
     ;;
 
   7) ls  $HOME/DB-managemnt/
-        echo "Please enter the NAME database you want to delete table on it ! "
+        echo "Please enter the NAME database! "
         read db
         echo "--------------"
         ls  $HOME/DB-managemnt/${db}/
@@ -91,33 +91,33 @@ case $n in
         echo "-----------"
         cat $HOME/DB-managemnt/${db}/${tb}
         echo ""
-	echo "Please enter values of record you want delete like v1,v2,v3,..."
+	echo "Please enter values of record you want delete like v1,v2,v3,... under c1,c2,c3,..."
 	read v
 	echo "${v}" >> $HOME/DB-managemnt/${db}/${tb}
 	echo "---------------"
 	cat $HOME/DB-managemnt/${db}/${tb}
-        echo ""
+        echo "";;
 
 
-  8) echo "Showing existing databases..."
-        mysql -uroot -p${rootpasswd} -e "show databases;"
+  8)    ls  $HOME/DB-managemnt/
+        echo "Please enter the NAME database! "
+        read db
+        echo "--------------"
+        ls  $HOME/DB-managemnt/${db}/
+        echo "Please enter the NAME table ! "
+        read tb
+        echo "-----------"
+        cat $HOME/DB-managemnt/${db}/${tb}
         echo ""
-        echo "Please enter the NAME database  ! "
-        read db8
-        mysql -uroot -p${rootpasswd} ${db8} -e  "show tables;" 2>/dev/null
-        echo ""
-        echo "Please enter the NAME of table  ! "
-        read t8
-        mysql -uroot -p${rootpasswd} -e "DESCRIBE ${db8}.${t8}" 2>/dev/null
-        echo ""
-        echo "Please enter colums names like c1,c2,c3,..."
-        read c8
-        mysql -uroot -p${rootpasswd} -e " SELECT * FROM  ${db8}.${t8};" 2>/dev/null
-	echo ""
-        echo "Please enter values of record you want delete like v1,v2,v3,... if string Please add between '' "
-        read v8
-	mysql -uroot -p${rootpasswd} -e  "DELETE FROM ${db8}.${t8} WHERE ${c8}=${v8};"
-        mysql -uroot -p${rootpasswd} -e " SELECT * FROM  ${db8}.${t8};" 2>/dev/null
+	awk '{print NR,$0}' $HOME/DB-managemnt/${db}/${tb} >> $HOME/DB-managemnt/${db}/${tb}.new
+	mv $HOME/DB-managemnt/${db}/${tb}.new $HOME/DB-managemnt/${db}/${tb}
+        cat $HOME/DB-managemnt/${db}/${tb}
+	echo "Please enter the number of record"
+	read n
+	sed ''${n}'d' $HOME/DB-managemnt/${db}/${tb} >> $HOME/DB-managemnt/${db}/${tb}.new
+	mv $HOME/DB-managemnt/${db}/${tb}.new $HOME/DB-managemnt/${db}/${tb}
+        cat $HOME/DB-managemnt/${db}/${tb}
+
         echo "" ;;
 
   9) echo "Showing existing databases..."
