@@ -13,7 +13,7 @@ echo "  5)Add Field from table "
 echo "  6)Delete  Field to table "
 echo "  7)Add records"
 echo "  8)Delete records"
-echo "  9)Select records with condition"
+
 read n
 case $n in
   1) 	echo "Please enter the NAME of the db! (example: database1)"
@@ -118,26 +118,6 @@ case $n in
 	mv $HOME/DB-managemnt/${db}/${tb}.new $HOME/DB-managemnt/${db}/${tb}
         cat $HOME/DB-managemnt/${db}/${tb}
 
-        echo "" ;;
-
-  9) echo "Showing existing databases..."
-        mysql -uroot -p${rootpasswd} -e "show databases;"
-        echo ""
-        echo "Please enter the NAME database  ! "
-        read db9
-        mysql -uroot -p${rootpasswd} ${db9} -e  "show tables;" 2>/dev/null
-        echo ""
-        echo "Please enter the NAME of table  ! "
-        read t9
-	echo "Please enter your condition like >1,<1,=1 "
-	read co9
-        mysql -uroot -p${rootpasswd} -e "DESCRIBE ${db9}.${t9}" 2>/dev/null
-        echo ""
-        echo "Please enter colums name like c1"
-        read c9
-#        echo "Please enter values of your condition"
-#        read v9
-        mysql -uroot -p${rootpasswd} -e  "SELECT * FROM ${db9}.${t9} WHERE ${c9}${co9};"
         echo "" ;;
 
   *) echo "invalid option";;
