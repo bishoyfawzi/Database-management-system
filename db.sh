@@ -13,7 +13,7 @@ echo "  5)Add Field from table "
 echo "  6)Delete  Field to table "
 echo "  7)Add records"
 echo "  8)Delete records"
-
+echo "  9)select with condition"
 read n
 case $n in
   1) 	echo "Please enter the NAME of the db! (example: database1)"
@@ -74,7 +74,7 @@ case $n in
 	echo "-----------"
 	cat $HOME/DB-managemnt/${db}/${tb}
 	echo ""
-        echo "Please enter the number of feild ! "
+        echo "Please enter the number of feild like if c1,c2,c3 if u want delete c2 the enter number 2 ! "
         read f
 	awk -F, '{for(i=1;i<=NF;i++)if(i!=x)f=f?f FS $i:$i;print f;f=""}' x=${f} $HOME/DB-managemnt/${db}/${tb} >> $HOME/DB-managemnt/${db}/${tb}.new
 	mv $HOME/DB-managemnt/${db}/${tb}.new $HOME/DB-managemnt/${db}/${tb}
@@ -119,6 +119,21 @@ case $n in
         cat $HOME/DB-managemnt/${db}/${tb}
 
         echo "" ;;
-
+  9)  
+	ls  $HOME/DB-managemnt/
+        echo "Please enter the NAME database! "
+        read db
+        echo "--------------"
+        ls  $HOME/DB-managemnt/${db}/
+        echo "Please enter the NAME table ! "
+        read tb
+        echo "-----------"
+        cat $HOME/DB-managemnt/${db}/${tb}
+        echo ""
+	echo "Please enter the number of field like if c1,c2,c3 if u want delete c2 the enter number 2 ! "
+        read f
+	echo "Please enter your condition like =1,<1,>1  ! "
+        read co
+	awk -F"," '$'${f}' '$co' "2" { print $0 }' $HOME/DB-managemnt/${db}/${tb};;
   *) echo "invalid option";;
 esac
