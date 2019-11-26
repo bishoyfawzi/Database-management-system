@@ -132,8 +132,10 @@ case $n in
         echo ""
 	echo "Please enter the number of field like if c1,c2,c3 if u want delete c2 the enter number 2 ! "
         read f
+	echo "Please enter condition ==,<,>"
+	read c
 	echo "Please enter your condition value  ! "
         read co
-	awk -F"," '$'${f}' ==  "'${co}'" { print $0 }' $HOME/DB-managemnt/${db}/${tb};;
+	awk -F"," '$'${f}' '${c}'  '${co}' { print $0 }' $HOME/DB-managemnt/${db}/${tb};;
   *) echo "invalid option";;
 esac
