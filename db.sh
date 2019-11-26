@@ -136,6 +136,6 @@ case $n in
 	read c
 	echo "Please enter your condition value  ! "
         read co
-	awk -F"," '$'${f}' '${c}'  '${co}' { print $0 }' $HOME/DB-managemnt/${db}/${tb};;
+	awk -F"," '$'${f}' '${c}'  "'${co}'" { print $0 }' $HOME/DB-managemnt/${db}/${tb};;
   *) echo "invalid option";;
 esac
